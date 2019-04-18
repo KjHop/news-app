@@ -1,7 +1,7 @@
 window.addEventListener('load', e =>{
     const defaultSource = "bbc-news";
     updateNews(defaultSource);
-    updateSources();
+    updateSources(defaultSource);
 });
 
 async function updateNews(source){
@@ -12,11 +12,15 @@ async function updateNews(source){
     document.getElementById("news").innerHTML = news;
 }
 
-async function updateSources(){
+async function updateSources(defaultSource){
     const result = await fetch("https://newsapi.org/v2/sources?apiKey=124e6d7bc3ea499abcff822a5a9509e3");
     const json = await result.json();
     const sources = json.sources.map(source=>{
-        return `<option onclick='updateNews("${source.id}")'>${source.name}</option>`
+        let selected="";
+        if(source.id===defaultSource){
+            selected = 'selected';
+        }
+        return `<option onclick='updateNews("${source.id}")' ${selected}>${source.name}</option>`
     }).join("\n");
 
     document.getElementById('sourceSelector').innerHTML = await sources;
@@ -24,7 +28,7 @@ async function updateSources(){
 
 function createNews(article){
     return `
-        <div>
+        <div class="article">
             <h2>${article.title}</h2>
             <h3>${article.description}</h3>
             <img src='${article.urlToImage}'/>

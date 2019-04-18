@@ -2,10 +2,27 @@
 
 html{
     font-family: 'Roboto', sans-serif;
+    background-color: #ecf0f1;
+    text-align:center;
+}
+body{
+    width:80vw;
+    margin-left:10vw;
+    margin-right:10vw;
 }
 
 select{
     position: absolute;
     top:0px;
     right:50px;
+}
+
+.article{
+    margin-top:25px;
+    margin-bottom:25px;
+}
+
+img{
+    width:50vw;
+    height:60vh;
 }
